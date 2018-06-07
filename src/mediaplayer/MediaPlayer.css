@@ -1,0 +1,17 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/* プレイヤー画面に背景を設定する */
+.innerborderpane{
+	-fx-background-image:url("background.jpg");
+	-fx-background-position:center;
+}
+
+/* 操作パネルに写真のスタイルを設定 */
+.stackpane-background{
+	-fx-background-image:url("bottom.jpg");
+	-fx-background-position:center;
+}
+/* ボタンの基本スタイルを設定 */
+.button{
+	-fx-background-color:grey;
+}
