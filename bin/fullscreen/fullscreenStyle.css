@@ -1,0 +1,16 @@
+
+.label{
+	-fx-text-fill:white;
+	-fx-font-size:16px;
+	-fx-stroke:black;
+	-fx-stroke-width:1px;
+	-fx-effect: dropshadow(three-pass-box, black, 10, 0.71, 0, 0)
+}
+
+.button{
+	-fx-background-color:transparent;
+	-fx-font-size:16px;
+	-fx-text-fill:white;
+	-fx-effect: dropshadow(three-pass-box, black, 10, 0.71, 0, 0);
+	-fx-border-color:yellow;
+}

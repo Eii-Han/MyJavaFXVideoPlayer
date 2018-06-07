@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+
+<StackPane stylesheets="@fullscreenStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fullscreen.FullScreenController">
+   <children>
+      <MediaView fx:id="fullMediaView" fitHeight="400.0" fitWidth="800.0" />
+      <VBox alignment="BOTTOM_CENTER">
+         <children>
+            <VBox fx:id="controlVBox" onMouseEntered="#NotOpaqueAndEditableByCursor" onMouseExited="#makeOpaqueAndEditableByCursor">
+               <children>
+                  <VBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="800.0">
+                     <children>
+                        <Slider fx:id="longTimeSlider" onMouseClicked="#setTimeSliderEvent" onMouseDragged="#setTimeSliderEvent" opacity="0.4" prefHeight="14.0" prefWidth="769.0" />
+                        <Label fx:id="timeLabel" text="Time" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="800.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#playMediaEvent" text="Play" />
+                        <Button mnemonicParsing="false" onAction="#pauseMediaEvent" text="Pause" />
+                        <Button mnemonicParsing="false" onAction="#stopMediaEvent" text="Stop" />
+                        <GridPane prefHeight="21.0" prefWidth="388.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="199.20001220703125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.59997558593753" minWidth="10.0" prefWidth="189.59998779296876" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Slider fx:id="longVolumeSlider" opacity="0.5" prefHeight="14.0" prefWidth="97.0" GridPane.rowIndex="1" />
+                              <Label text="Volume" />
+                              <Label fx:id="volumeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <effect>
+                                    <DropShadow spread="0.71" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Button fx:id="stopButton1" mnemonicParsing="false" onAction="#exitFullScreen" text="Exit Full Screen" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
