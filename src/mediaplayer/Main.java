@@ -20,38 +20,38 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		//@FXMLƒtƒ@ƒCƒ‹‚©‚çƒV[ƒ“‚ğæ“¾‚·‚é‚Ìƒ[ƒ_[‚Å‚·B
+		//ã€€FXMLãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚·ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹ã®ãƒ­ãƒ¼ãƒ€ãƒ¼ã§ã™ã€‚
 		FXMLLoader loader = new FXMLLoader();
 		
 		try {
-			// FXMLƒtƒ@ƒCƒ‹‚ÌURL‚ğæ“¾A‚±‚ê‚ğƒ[ƒh‚·‚é
+			// FXMLãƒ•ã‚¡ã‚¤ãƒ«ã®URLã‚’å–å¾—ã€ã“ã‚Œã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
 			loader.setLocation(getClass().getResource("MediaPlayer.fxml"));
 			Parent root = loader.load();
 			
-			// ƒV[ƒ“‚ğì¬
+			// ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
 			Scene scene = new Scene(root);
 			
-			// CSS‚ğæ“¾
+			// CSSã‚’å–å¾—
 			scene.getStylesheets().add(getClass().getResource("MediaPlayer.css").toExternalForm());
 			
-			//@ƒXƒe[ƒW‚ğİ’è‚·‚éB
+			//ã€€ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¨­å®šã™ã‚‹ã€‚
 			primaryStage.setTitle("My Video Player");
 			primaryStage.setScene(scene);
 			
-			// ƒvƒŒƒCƒ„[“®ì‚µ‚Ä‚¢‚éŠÔAƒŠƒTƒCƒY‚·‚éAMenu‚©‚çƒXƒe[ƒW‚Ì‘å‚«‚³‚ğ•ÏX‰Â”\‚É‚·‚éB
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å‹•ä½œã—ã¦ã„ã‚‹é–“ã€ãƒªã‚µã‚¤ã‚ºã™ã‚‹æ™‚ã€Menuã‹ã‚‰ã‚¹ãƒ†ãƒ¼ã‚¸ã®å¤§ãã•ã‚’å¤‰æ›´å¯èƒ½ã«ã™ã‚‹ã€‚
 			primaryStage.setResizable(true);
 			
-			// ƒXƒe[ƒW‚ğ•\¦
+			// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¡¨ç¤º
 			primaryStage.show();
 			
-			// ƒXƒe[ƒWƒIƒuƒWƒFƒNƒg‚ğƒRƒ“ƒgƒ[ƒ‰‚Éˆø‚«“n‚µ
+			// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã«å¼•ãæ¸¡ã—
 			MediaPlayerController.setStage(primaryStage);
 			
-			// Œë‘€ì‚ğ–h~‚·‚é‚½‚ßA~ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚·‚éÛ‚ÉŒxƒƒbƒZ[ƒW‚ğ•\¦
+			// èª¤æ“ä½œã‚’é˜²æ­¢ã™ã‚‹ãŸã‚ã€Ã—ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹éš›ã«è­¦å‘Šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
 			primaryStage.setOnCloseRequest(e->{
 				e.consume();
 				
-				Alert alert = new Alert(AlertType.CONFIRMATION, "ƒvƒŒƒCƒ„[‚ğ•Â‚¶‚Ü‚·‚©?", ButtonType.YES, ButtonType.NO);
+				Alert alert = new Alert(AlertType.CONFIRMATION, "ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’é–‰ã˜ã¾ã™ã‹?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
 				
 				if(alert.getResult() == ButtonType.YES) {

@@ -16,22 +16,22 @@ import javafx.util.Duration;
 
 public class FullScreenController {
 	
-	// FXML‚ÌƒtƒB[ƒ‹ƒh
-	// ‚·‚×‚Ä‚ÌƒAƒCƒeƒ€‚ğƒ{ƒgƒ€‚É”z’u‚·‚é2”Ô–Ú2”Ô–Ú‚ÌVBox
+	// FXMLã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+	// ã™ã¹ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒœãƒˆãƒ ã«é…ç½®ã™ã‚‹2ç•ªç›®2ç•ªç›®ã®VBox
 	@FXML private VBox controlVBox;
 	
-	// ‘S‰æ–Ê‚ÌƒƒfƒBƒAƒrƒ…[
+	// å…¨ç”»é¢ã®ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼
 	@FXML private MediaView fullMediaView;
 	
-	// ƒ^ƒCƒ€ƒXƒ‰ƒCƒ_[
+	// ã‚¿ã‚¤ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 	@FXML private Slider longTimeSlider;
 	@FXML private Label timeLabel;
 	
-	//@ƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[
+	//ã€€ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 	@FXML private Slider longVolumeSlider;
 	@FXML private Label volumeLabel;
 	
-	// ƒtƒB[ƒ‹ƒh•Ï”
+	// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å¤‰æ•°
 	private MediaPlayer mediaPlayer;
 	private Stage mediaStage;
 	
@@ -43,47 +43,47 @@ public class FullScreenController {
 	 */
 	public void init(Stage ms, MediaPlayer mp) {
 		
-		// MediaPlayer‚©‚çˆø‚«“n‚³‚ê‚½•Ï”‚ğƒtƒB[ƒ‹ƒh‚Éİ’è‚·‚é
+		// MediaPlayerã‹ã‚‰å¼•ãæ¸¡ã•ã‚ŒãŸå¤‰æ•°ã‚’ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«è¨­å®šã™ã‚‹
 		mediaPlayer = mp;
 		mediaStage = ms;
 		
-		// ‘S‰æ–Ê‚ÌƒTƒCƒY‚ğæ“¾‚·‚é
+		// å…¨ç”»é¢ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		// ƒƒfƒBƒAƒrƒ…[‚É‘Î‚µ‚ÄA‘S‰æ–Ê‚Ì‘å‚«‚³‚Æ‚ÌƒoƒCƒ“ƒfƒBƒ“ƒO‚ğs‚¤B
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼ã«å¯¾ã—ã¦ã€å…¨ç”»é¢ã®å¤§ãã•ã¨ã®ãƒã‚¤ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’è¡Œã†ã€‚
 		screenWidth = new SimpleDoubleProperty(screen.getWidth());
 		screenHeight = new SimpleDoubleProperty(screen.getHeight());
 		fullMediaView.fitWidthProperty().bind(screenWidth);
 		fullMediaView.fitHeightProperty().bind(screenHeight);
 		
-		// ‘S‰æ–Ê‚Ì”¼“§–¾ƒ^ƒCƒ€ƒXƒ‰ƒCƒ_[‚Ì‰Šúİ’è‚ğs‚¤
+		// å…¨ç”»é¢ã®åŠé€æ˜ã‚¿ã‚¤ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸè¨­å®šã‚’è¡Œã†
 		longTimeSlider.setPrefWidth(screen.getWidth());
 		setTimeSliderListener();
 		
-		// ‘S‰æ–Ê‚Ì”¼“§–¾ƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[‚Ì‰Šúİ’è‚ğs‚¤
+		// å…¨ç”»é¢ã®åŠé€æ˜ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸè¨­å®šã‚’è¡Œã†
 		volumeLabel.setText(Double.toString(mediaPlayer.getVolume()*100));
 		setVolumeSliderListener();
 		
-		// ƒƒfƒBƒAƒvƒŒƒCƒ„[‚ğƒƒfƒBƒAƒrƒ…[‚Éİ’è
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼ã«è¨­å®š
 		fullMediaView.setMediaPlayer(mp);
 		
-		// StackPane‚É‚ ‚éˆê”Ôã‚ÌVBox‚ğŠ®‘S“§–¾‚Éİ’è
+		// StackPaneã«ã‚ã‚‹ä¸€ç•ªä¸Šã®VBoxã‚’å®Œå…¨é€æ˜ã«è¨­å®š
 		controlVBox.setOpacity(0);
 
 	}
 	
 
 	/**
-	 * ƒ^ƒCƒ€ƒXƒ‰ƒCƒ_[‚ğˆÚ“®‚³‚ê‚é‚ÌƒCƒxƒ“ƒg
+	 * ã‚¿ã‚¤ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç§»å‹•ã•ã‚Œã‚‹æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
 	 */
 	@FXML
 	private void setTimeSliderEvent() {
-		//ˆÚ“®‚³‚ê‚é‚ÆƒV[ƒN‚·‚é
+		//ç§»å‹•ã•ã‚Œã‚‹ã¨ã‚·ãƒ¼ã‚¯ã™ã‚‹
 		mediaPlayer.seek(Duration.seconds(longTimeSlider.getValue()));
 	}
 
 	/**
-	 * ƒJ[ƒ\ƒ‹‚ªVBox‚ÌŠO‚Å‚ÍŠ®‘S“§–¾‚É‚·‚é
+	 * ã‚«ãƒ¼ã‚½ãƒ«ãŒVBoxã®å¤–ã§ã¯å®Œå…¨é€æ˜ã«ã™ã‚‹
 	 */
 	@FXML
 	private void makeOpaqueAndEditableByCursor() {
@@ -91,7 +91,7 @@ public class FullScreenController {
 	}
 	
 	/**
-	 * ƒJ[ƒ\ƒ‹‚ªVBox‚Ì’†‚Å‚Í•s“§–¾‚É‚·‚é
+	 * ã‚«ãƒ¼ã‚½ãƒ«ãŒVBoxã®ä¸­ã§ã¯ä¸é€æ˜ã«ã™ã‚‹
 	 */
 	@FXML
 	private void NotOpaqueAndEditableByCursor() {
@@ -99,7 +99,7 @@ public class FullScreenController {
 	}
 	
 	/**
-	 *@Ä¶ƒ{ƒ^ƒ“
+	 *ã€€å†ç”Ÿãƒœã‚¿ãƒ³
 	 */
 	@FXML 
 	private void playMediaEvent() {
@@ -107,7 +107,7 @@ public class FullScreenController {
 	}
 	
 	/**
-	 * ˆê’â~ƒ{ƒ^ƒ“
+	 * ä¸€æ™‚åœæ­¢ãƒœã‚¿ãƒ³
 	 */
 	@FXML 
 	private void pauseMediaEvent() {
@@ -115,7 +115,7 @@ public class FullScreenController {
 	}
 
 	/**
-	 * ’â~ƒ{ƒ^ƒ“
+	 * åœæ­¢ãƒœã‚¿ãƒ³
 	 */
 	@FXML
 	private void stopMediaEvent() {
@@ -123,71 +123,71 @@ public class FullScreenController {
 	}
 	
 	/**
-	 * ƒtƒ‹ƒXƒNƒŠ[ƒ“I—¹ƒ{ƒ^ƒ“
+	 * ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³çµ‚äº†ãƒœã‚¿ãƒ³
 	 * @param e
 	 */
 	@FXML
 	private void exitFullScreen(ActionEvent e) {
-		// ‘S‰æ–Ê‚ÌƒXƒe[ƒWƒIƒuƒWƒFƒNƒg‚ğæ“¾
+		// å…¨ç”»é¢ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
 		Stage thisStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		thisStage.close();
 		
-		// ƒƒfƒBƒAƒvƒŒƒCƒ„[ƒXƒe[ƒW‚ğ•\¦
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¡¨ç¤º
 		mediaStage.show();
 	}
 	
 	/**
-	 * ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰‚Æ‚µ‚Ä
+	 * ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã¨ã—ã¦
 	 */
 	private void setTimeSliderListener() {
 		
-		//@“®‰æÄ¶‚Ìƒ^ƒCƒ€ƒXƒ‰ƒCƒ_[‚Ì‰Šú’l‚ğ“o˜^‚·‚é
+		//ã€€å‹•ç”»å†ç”Ÿæ™‚ã®ã‚¿ã‚¤ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸå€¤ã‚’ç™»éŒ²ã™ã‚‹
 		longTimeSlider.setMax(mediaPlayer.getStopTime().toSeconds());
 		longTimeSlider.setMin(mediaPlayer.getStartTime().toSeconds());
 
-		// ƒsƒNƒZƒ‹‹«ŠE‚Ì’²®‚ğ‘N–¾‚É‚·‚é
+		// ãƒ”ã‚¯ã‚»ãƒ«å¢ƒç•Œã®èª¿æ•´ã‚’é®®æ˜ã«ã™ã‚‹
 		longTimeSlider.setSnapToPixel(true);
 
 	
-		// Ä¶’†‚ÉƒXƒ‰ƒCƒ_[‚ğˆÚ“®
-		// ƒvƒŒƒCƒ„[‚ÌÄ¶’†‚ÉŒÄ‚Ño‚³‚ê‚éƒŠƒXƒi‚ğ“o˜^
+		// å†ç”Ÿä¸­ã«ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç§»å‹•
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å†ç”Ÿä¸­ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒªã‚¹ãƒŠã‚’ç™»éŒ²
 		mediaPlayer.currentTimeProperty().addListener((ov, newVal, currentVal)->{
 			
-			// “®‰æŒ»İŠÔ‚ÆI—¹ŠÔ‚ğæ“¾
+			// å‹•ç”»ç¾åœ¨æ™‚é–“ã¨çµ‚äº†æ™‚é–“ã‚’å–å¾—
 			double currentTime = mediaPlayer.getCurrentTime().toSeconds();
 			double endTime = mediaPlayer.getStopTime().toSeconds();
 			
-			// “®‰æ‚Ìî•ñ‚ğƒ‰ƒxƒ‹‚Éo—Í
+			// å‹•ç”»ã®æƒ…å ±ã‚’ãƒ©ãƒ™ãƒ«ã«å‡ºåŠ›
 			String curTimeStr = String.format("%3.0f:%02.0f", currentTime / 60, currentTime % 60 ) +"/" +
 					String.format("%3.0f:%02.0f", endTime / 60, endTime % 60);
 			timeLabel.setText(curTimeStr);
 			
-			// ƒXƒ‰ƒCƒ_[‚ğˆÚ“®
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç§»å‹•
 			longTimeSlider.setValue(currentTime);
 		});
 
 	}
 	
 	/**
-	 * ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰‚Æ‚µ‚ÄAƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[‚É“®‰æ‚Ìî•ñ‚ğ’ñ‹Ÿ‚·‚é
+	 * ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã¨ã—ã¦ã€ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã«å‹•ç”»ã®æƒ…å ±ã‚’æä¾›ã™ã‚‹
 	 */
 	private void setVolumeSliderListener() {
 
-		//ƒXƒ‰ƒCƒ_[‚Ì‰Šú’l‚ğİ’è‚·‚é
+		//ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸå€¤ã‚’è¨­å®šã™ã‚‹
 		longVolumeSlider.setMin(0);
 		longVolumeSlider.setMax(1);
 		longVolumeSlider.setValue(mediaPlayer.getVolume());
 		longVolumeSlider.setSnapToPixel(true);
 		
-		// Ä¶’†‚Éƒ{ƒŠƒ…[ƒ€‚ğ•\¦
-		// ƒvƒŒƒCƒ„[‚Ìƒ{ƒŠƒ…[ƒ€‚ª•ÏX‚³‚ê‚é‚½‚Ñ‚ÉŒÄ‚Ño‚³‚ê‚éƒŠƒXƒi‚ğ“o˜^
+		// å†ç”Ÿä¸­ã«ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚’è¡¨ç¤º
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒœãƒªãƒ¥ãƒ¼ãƒ ãŒå¤‰æ›´ã•ã‚Œã‚‹ãŸã³ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒªã‚¹ãƒŠã‚’ç™»éŒ²
 		longVolumeSlider.valueProperty().addListener((ov, newVal, curVal)->{
 			
-			// “®‰æ‚Ìƒ{ƒŠƒ…[ƒ€î•ñ‚ğƒ‰ƒxƒ‹‚Éo—Í
+			// å‹•ç”»ã®ãƒœãƒªãƒ¥ãƒ¼ãƒ æƒ…å ±ã‚’ãƒ©ãƒ™ãƒ«ã«å‡ºåŠ›
 			String volumeStr = String.format("%3.1f", mediaPlayer.getVolume()*100);
 			volumeLabel.setText(volumeStr);
 			
-			// ƒXƒ‰ƒCƒ_‚É‡‚í‚¹‚Äƒ{ƒŠƒ…[ƒ€‚ğ•ÏX
+			// ã‚¹ãƒ©ã‚¤ãƒ€ã«åˆã‚ã›ã¦ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚’å¤‰æ›´
 			mediaPlayer.setVolume(longVolumeSlider.getValue());
 		});
 		

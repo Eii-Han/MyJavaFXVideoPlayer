@@ -48,29 +48,29 @@ import javafx.util.Duration;
  */
 public class MediaPlayerController implements Initializable {
 	
-	// ‘€ìƒpƒlƒ‹‚ÌƒXƒ‰ƒCƒ_
+	// æ“ä½œãƒ‘ãƒãƒ«ã®ã‚¹ãƒ©ã‚¤ãƒ€
 	@FXML private Slider timeSlider;
 	@FXML private Slider volumeSlider;
 	@FXML private Label timeInfoLabel;
 	@FXML private Label volumeInfoLabel;
 	
-	// ‘€ìƒpƒlƒ‹‚Ìƒ{ƒ^ƒ“FÄ¶Aˆê’â~A’â~AŒJ•Ô‚µ
+	// æ“ä½œãƒ‘ãƒãƒ«ã®ãƒœã‚¿ãƒ³ï¼šå†ç”Ÿã€ä¸€æ™‚åœæ­¢ã€åœæ­¢ã€ç¹°è¿”ã—
 	@FXML private Button newMediaButton;
 	@FXML private Button playButton;
 	@FXML private Button pauseButton;
 	@FXML private Button stopButton;
 	@FXML private ToggleButton repeatButton;
 	
-	//@Menuã‚ÌƒAƒCƒeƒ€FÄ¶Aˆê’â~A’â~AŒJ•Ô‚µ
+	//ã€€Menuä¸Šã®ã‚¢ã‚¤ãƒ†ãƒ ï¼šå†ç”Ÿã€ä¸€æ™‚åœæ­¢ã€åœæ­¢ã€ç¹°è¿”ã—
 	@FXML private MenuItem playMenuItem;
 	@FXML private MenuItem pauseMenuItem;
 	@FXML private MenuItem stopMenuItem;
 	@FXML private MenuItem repeatMenuItem;
 	
-	//@Ã‰¹
+	//ã€€é™éŸ³
 	@FXML private MenuItem muteMenuItem;
 	
-	//@ƒXƒ^[ƒgƒƒjƒ…[‚ÌƒAƒCƒeƒ€
+	//ã€€ã‚¹ã‚¿ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚¢ã‚¤ãƒ†ãƒ 
 	@FXML private MenuItem newMediaMenuItem;
 	@FXML private MenuItem closeMenuItem;
 	
@@ -78,56 +78,56 @@ public class MediaPlayerController implements Initializable {
 	@FXML private BorderPane innerBorderPane;
 	@FXML private BorderPane outerBorderPane;
 	
-	//ƒgƒbƒv‚Ì”z’u‚Æƒ{ƒgƒ€‚Ì”z’u
+	//ãƒˆãƒƒãƒ—ã®é…ç½®ã¨ãƒœãƒˆãƒ ã®é…ç½®
 	@FXML private VBox topmostVBox;
 	@FXML private HBox bottomHBox;
 	
-	// ‰f‘œ‚ğ•\¦‚·‚éƒƒfƒBƒAƒrƒ…[
+	// æ˜ åƒã‚’è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼
 	@FXML private MediaView mediaView;
 	
-	//@Ä¶’†‚ÌƒƒfƒBƒA‚ÌƒvƒŒƒCƒ„[
+	//ã€€å†ç”Ÿä¸­ã®ãƒ¡ãƒ‡ã‚£ã‚¢ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	private MediaPlayer mediaPlayer;
 	
-	// ƒpƒ\ƒRƒ“‚ÌƒTƒCƒY‚ğ‹L‰¯‚·‚éƒIƒuƒWƒFƒNƒg
+	// ãƒ‘ã‚½ã‚³ãƒ³ã®ã‚µã‚¤ã‚ºã‚’è¨˜æ†¶ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	private Dimension screenSize;
 	
-	// ƒvƒŒƒCƒ„[‚ğ•\¦‚·‚éƒXƒe[ƒW
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¡¨ç¤ºã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸
 	private static Stage stage;
 	
-	// ƒvƒŒƒCƒ„[‚ª‚ ‚é‚Æ‚È‚¢‚Ì“®ì‚ğ§Œä‚·‚é‚½‚ß‚É’è‹`‚³‚ê‚½Boolean
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã‚ã‚‹æ™‚ã¨ãªã„æ™‚ã®å‹•ä½œã‚’åˆ¶å¾¡ã™ã‚‹ãŸã‚ã«å®šç¾©ã•ã‚ŒãŸBoolean
 	private boolean haveMediaPlayer = false;
 	
-	// ƒ_ƒuƒ‹ƒNƒŠƒbƒN‚ª—LŒø‚©‚Ç‚¤‚©‚ğ”»’è‚·‚é‚Ég‚¤ƒtƒB[ƒ‹ƒh‚Å‚·B
+	// ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ãŒæœ‰åŠ¹ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹æ™‚ã«ä½¿ã†ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã§ã™ã€‚
 	private long firstClickTime = 0;
 	private long secondClickTime = 0;
 
 	/* 
-	 * ƒvƒŒƒCƒ„[‚ğ‰Šú‰»
+	 * ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’åˆæœŸåŒ–
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		//@ƒpƒ\ƒRƒ“‚Ì‰æ–ÊƒTƒCƒY‚ğæ“¾
+		//ã€€ãƒ‘ã‚½ã‚³ãƒ³ã®ç”»é¢ã‚µã‚¤ã‚ºã‚’å–å¾—
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		// ‰Šú’l‚Æ‚µ‚Ä‰æ–Ê‚Ì”¼•ª‚ğİ’è‚·‚é
+		// åˆæœŸå€¤ã¨ã—ã¦ç”»é¢ã®åŠåˆ†ã‚’è¨­å®šã™ã‚‹
 		outerBorderPane.setPrefSize(screenSize.getWidth() * 0.5 , screenSize.getHeight() * 0.5 );
 		
-		// ƒƒfƒBƒAƒrƒ…[‚ÆBorderPane‚ÌƒoƒCƒ“ƒfƒBƒ“ƒO‚ğİ’è‚·‚é
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼ã¨BorderPaneã®ãƒã‚¤ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’è¨­å®šã™ã‚‹
 		innerBorderPane.prefWidthProperty().bind(mediaView.fitWidthProperty());
 		innerBorderPane.prefHeightProperty().bind(mediaView.fitHeightProperty());
 
 		mediaView.fitWidthProperty().bind(outerBorderPane.widthProperty().multiply(1).subtract(20));
 		mediaView.fitHeightProperty().bind(outerBorderPane.heightProperty().multiply(1).
-				subtract(topmostVBox.getHeight() + bottomHBox.getHeight()+70));   // ƒgƒbƒv‚Æƒ{ƒgƒ€‚É”z’u‚·‚é‚à‚Ì‚ÌƒIƒtƒZƒbƒg‚ğİ’è‚·‚é
+				subtract(topmostVBox.getHeight() + bottomHBox.getHeight()+70));   // ãƒˆãƒƒãƒ—ã¨ãƒœãƒˆãƒ ã«é…ç½®ã™ã‚‹ã‚‚ã®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’è¨­å®šã™ã‚‹
 		
-		// ƒƒfƒBƒA‚ª‚Ü‚¾ƒ[ƒh‚³‚ê‚Ä‚¢‚È‚¢ó‘Ô‚Å‘€ì‚Å‚«‚é‚Í‚¸‚Ì‚È‚¢‚à‚Ì‚ğ–³Œø‰»‚·‚é
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãŒã¾ã ãƒ­ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ãªã„çŠ¶æ…‹ã§æ“ä½œã§ãã‚‹ã¯ãšã®ãªã„ã‚‚ã®ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
 		setItemsDisable();
 	}
 	
 	/**
-	 * Ä¶ƒ{ƒ^ƒ“‚ÆÄ¶ƒƒjƒ…[‚Ì“®ì‚ğ’è‹`
+	 * å†ç”Ÿãƒœã‚¿ãƒ³ã¨å†ç”Ÿãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML 
 	private void playMediaEvent() {
@@ -135,7 +135,7 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ˆê’â~ƒ{ƒ^ƒ“‚Æˆê’â~ƒƒjƒ…[‚Ì“®ì‚ğ’è‹`
+	 * ä¸€æ™‚åœæ­¢ãƒœã‚¿ãƒ³ã¨ä¸€æ™‚åœæ­¢ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML 
 	private void pauseMediaEvent() {
@@ -143,7 +143,7 @@ public class MediaPlayerController implements Initializable {
 	}
 
 	/**
-	 * ’â~ƒ{ƒ^ƒ“‚Æ’â~ƒƒjƒ…[‚Ì“®ì‚ğ’è‹`
+	 * åœæ­¢ãƒœã‚¿ãƒ³ã¨åœæ­¢ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML
 	private void stopMediaEvent() {
@@ -151,55 +151,55 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * V‹KƒƒfƒBƒAƒ{ƒ^ƒ“Eƒƒjƒ…[‚ªƒNƒŠƒbƒN‚³‚ê‚é‚Ì“®ì‚ğ’è‹`
+	 * æ–°è¦ãƒ¡ãƒ‡ã‚£ã‚¢ãƒœã‚¿ãƒ³ãƒ»ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚Œã‚‹æ™‚ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML
 	private void newMediaLoadingEvent() {
 		
-		// ‚Ü‚¸AƒƒfƒBƒAƒtƒ@ƒCƒ‹‚ğƒ[ƒh‚µ‚Ä‚İ‚éB³íŠ®—¹‚·‚ê‚ÎAƒvƒŒƒCƒ„[‚ğ•Ô‚·B
+		// ã¾ãšã€ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦ã¿ã‚‹ã€‚æ­£å¸¸å®Œäº†ã™ã‚Œã°ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿”ã™ã€‚
 		Optional<MediaPlayer> optionalPlayer = Optional.ofNullable(returnNewPlayer());
 		
-		// ƒvƒŒƒCƒ„[‚ª‘¶İ‚·‚éê‡‚Ì‚İA‰º‹L‚ÌƒR[ƒh‚ğÀs‚·‚é
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹å ´åˆã®ã¿ã€ä¸‹è¨˜ã®ã‚³ãƒ¼ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹
 		if(optionalPlayer.isPresent()) {
 			
-			// ƒvƒŒƒCƒ„[‚ğƒQƒbƒg‚·‚é
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚²ãƒƒãƒˆã™ã‚‹
 			mediaPlayer = optionalPlayer.get();
 			
-			// ƒƒfƒBƒAƒrƒ…[‚Éİ’è
+			// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼ã«è¨­å®š
 			mediaView.setMediaPlayer(mediaPlayer);
 
-			// ‰Šú’l‚Æ‚µ‚Ä–³Œø‰»‚³‚ê‚½‚·‚×‚Ä‚Ì‚à‚Ì‚ğ—LŒø‚É‚·‚é
+			// åˆæœŸå€¤ã¨ã—ã¦ç„¡åŠ¹åŒ–ã•ã‚ŒãŸã™ã¹ã¦ã®ã‚‚ã®ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 			setItemsEnable();
 			
-			// Ä¶I—¹‚µ‚½‚Ì“®ì‚ğİ’è
+			// å†ç”Ÿçµ‚äº†ã—ãŸæ™‚ã®å‹•ä½œã‚’è¨­å®š
 			mediaPlayer.setOnEndOfMedia(this::repeatMediaEvent);
 			
-			// Ä¶ŠÔƒXƒ‰ƒCƒ_[‚Ì‰Šú’l‚ğİ’è
+			// å†ç”Ÿæ™‚é–“ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸå€¤ã‚’è¨­å®š
 			timeSlider.setMin(0);
 			timeSlider.setMax(1);
 
-			// Readyó‘Ô‚Å‚ÌƒXƒ‰ƒCƒ_[ƒvƒƒpƒeƒB‚ğİ’è
+			// ReadyçŠ¶æ…‹ã§ã®ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’è¨­å®š
 			setTimeSliderEventOnReady();
 			
-			//@ƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[‚Ì‰Šú’l‚ğİ’è
+			//ã€€ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸå€¤ã‚’è¨­å®š
 			volumeSlider.setMin(0);
 			volumeSlider.setMax(1);
 
 			
-			// Readyó‘Ô‚Å‚ÌƒXƒ‰ƒCƒ_[ƒvƒƒpƒeƒB‚ğİ’è
+			// ReadyçŠ¶æ…‹ã§ã®ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’è¨­å®š
 			setVolumeSliderEventOnReady();
 			
-			// ƒƒfƒBƒA‚Ìƒ[ƒh‚ª¬Œ÷‚Å‚ ‚é‚½‚ßA^‚Éİ’è‚·‚éB
+			// ãƒ¡ãƒ‡ã‚£ã‚¢ã®ãƒ­ãƒ¼ãƒ‰ãŒæˆåŠŸã§ã‚ã‚‹ãŸã‚ã€çœŸã«è¨­å®šã™ã‚‹ã€‚
 			haveMediaPlayer = true;
 		}
 	}
 	
 	/**
-	 * ˜A‘±Ä¶‚Æƒƒjƒ…[‚Ì“®ì‚ğİ’è
+	 * é€£ç¶šå†ç”Ÿã¨ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’è¨­å®š
 	 */
 	@FXML
 	private void repeatMenuPressed() {
-		// ˜A‘±Ä¶ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğİ’è
+		// é€£ç¶šå†ç”Ÿãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¨­å®š
 		if(repeatButton.isSelected()) {
 			repeatButton.setSelected(false);
 		}else {
@@ -208,44 +208,44 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ŠÔƒXƒ‰ƒCƒ_[ˆÚ“®‚ÌƒCƒxƒ“ƒg‚ğ’è‹`
+	 * æ™‚é–“ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ç§»å‹•æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å®šç¾©
 	 */
 	@FXML
 	private void setEventOnTimeSlider() {
-		// ƒXƒ‰ƒCƒ_[‚ğ‘€ì‚·‚é‚ÆƒV[ƒN‚·‚é
+		// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’æ“ä½œã™ã‚‹ã¨ã‚·ãƒ¼ã‚¯ã™ã‚‹
 		mediaPlayer.seek(Duration.seconds(timeSlider.getValue()));
 	}
 	
 	/**
-	 * ƒNƒ[ƒYƒƒjƒ…[‚Ì“®ì‚ğ’è‹`‚·‚éB
+	 * ã‚¯ãƒ­ãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©ã™ã‚‹ã€‚
 	 */
 	@FXML
 	private void closeMenuItemClicked() {
-		// Å‰‚ÌƒXƒe[ƒW‚ğƒNƒ[ƒY
+		// æœ€åˆã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ã‚¯ãƒ­ãƒ¼ã‚º
 		stage.close();
 	}
 	
 	/**
-	 * “®‰æíœƒƒjƒ…‚Ì“®ì‚ğİ’è
+	 * å‹•ç”»å‰Šé™¤ãƒ¡ãƒ‹ãƒ¥ã®å‹•ä½œã‚’è¨­å®š
 	 */
 	@FXML
 	private void removeMediaClicked() {
 
-		// Œ»İƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾
+		// ç¾åœ¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å–å¾—
 		switch(mediaPlayer.getStatus()) {
-		// Ä¶’†ó‘Ô‚Ìê‡‚Í“®ìíœ‚ğ‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
+		// å†ç”Ÿä¸­çŠ¶æ…‹ã®å ´åˆã¯å‹•ä½œå‰Šé™¤ã‚’ã§ããªã„ã‚ˆã†ã«ã™ã‚‹
 		case PLAYING:
-			Alert alert1 = new Alert(AlertType.ERROR, "Ä¶’†‚Ì“®‰æ‚Ííœ‚Å‚«‚Ü‚¹‚ñ");
+			Alert alert1 = new Alert(AlertType.ERROR, "å†ç”Ÿä¸­ã®å‹•ç”»ã¯å‰Šé™¤ã§ãã¾ã›ã‚“");
 			mediaPlayer.pause();
 			alert1.showAndWait();
 			mediaPlayer.play();
 			break;
-		//@‚»‚à‚»‚à“®‰æ‚ªƒ[ƒh‚³‚ê‚Ä‚¢‚È‚¢ê‡
+		//ã€€ãã‚‚ãã‚‚å‹•ç”»ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ãªã„å ´åˆ
 		case UNKNOWN:
-			Alert alert2 = new Alert(AlertType.INFORMATION, "“®‰æ‚Í‚ ‚è‚Ü‚¹‚ñB");
+			Alert alert2 = new Alert(AlertType.INFORMATION, "å‹•ç”»ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
 			alert2.show();
 			break;
-		// ‚»‚Ì‘¼‚Ìó‘Ô‚Ííœˆ—‚ği‚ß‚é
+		// ãã®ä»–ã®çŠ¶æ…‹ã¯å‰Šé™¤å‡¦ç†ã‚’é€²ã‚ã‚‹
 		default:
 			removeMedia();
 			break;
@@ -254,42 +254,42 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ‘S‰æ–Ê•\¦ƒ‚[ƒh
+	 * å…¨ç”»é¢è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰
 	 */
 	@FXML
 	private void fullScreen(Event event) {
 		
-		//@ƒvƒŒƒCƒ„[‚É“®‰æ‚ª‚ ‚é‚©‚Ç‚¤‚©‚ğŠm”F‚·‚é
+		//ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å‹•ç”»ãŒã‚ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèªã™ã‚‹
 		if(haveMediaPlayer) {
-			// ƒƒfƒBƒAƒrƒ…[‚Å‚Í2‰ñƒNƒŠƒbƒNAƒƒjƒ…[ƒo[‚Å‚ÍƒAƒCƒeƒ€‚ğ‘I‘ğ
+			// ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ“ãƒ¥ãƒ¼ã§ã¯2å›ã‚¯ãƒªãƒƒã‚¯ã€ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼ã§ã¯ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸æŠ
 			if(checkMouseClicked() | selectedfromMenu(event)) {
 				
-				// FXMLƒtƒ@ƒCƒ‹‚©‚çƒV[ƒ“‚ğæ“¾
+				// FXMLãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚·ãƒ¼ãƒ³ã‚’å–å¾—
 				FXMLLoader loader = new FXMLLoader();
 				try {
 					Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 					loader.setLocation(fullscreen.FullScreenController.class.getResource("FullScreen.fxml"));
 					Parent root = loader.load();
 					
-					//@ƒV[ƒ“‚ÌƒTƒCƒY‚ğ’[––‚Ì‰æ–Ê‚Ì‘å‚«‚³‚Éİ’è
+					//ã€€ã‚·ãƒ¼ãƒ³ã®ã‚µã‚¤ã‚ºã‚’ç«¯æœ«ã®ç”»é¢ã®å¤§ãã•ã«è¨­å®š
 					Scene scene = new Scene(root,screen.getWidth(),screen.getHeight());
 
-					// ‘S‰æ–Ê‚ÌƒRƒ“ƒgƒ[ƒ‰[‚ğæ“¾
+					// å…¨ç”»é¢ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’å–å¾—
 					FullScreenController controller = loader.getController();
 
-					// ƒXƒe[ƒWƒXƒ^ƒCƒ‹‚Í‚È‚ñ‚Ì‘•ü‚ª‚È‚¢‚à‚Ì‚Éİ’è‚·‚é
+					// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¹ã‚¿ã‚¤ãƒ«ã¯ãªã‚“ã®è£…é£¾ãŒãªã„ã‚‚ã®ã«è¨­å®šã™ã‚‹
 					Stage newsStage = new Stage(StageStyle.UNDECORATED);
 					newsStage.setScene(scene);
 					
-					// ‘S‰æ–Ê‚ğOn‚É‚·‚é
+					// å…¨ç”»é¢ã‚’Onã«ã™ã‚‹
 					newsStage.setFullScreen(true);
 					newsStage.initModality(Modality.APPLICATION_MODAL);
 					
-					// ‘S‰æ–Ê‚ğ•\¦‚·‚é‚Æ“¯‚ÉAŒ»İ‚Ì‰æ–Ê‚ğ‰B‚ê‚é
+					// å…¨ç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ã¨åŒæ™‚ã«ã€ç¾åœ¨ã®ç”»é¢ã‚’éš ã‚Œã‚‹
 					newsStage.show();
 					stage.hide();
 
-					// ‘S‰æ–Ê‚ÅESCƒL[‚ğ‰Ÿ‰º‚µ‚½‚çAƒvƒŒƒCƒ„[‰æ–Ê‚É–ß‚é
+					// å…¨ç”»é¢ã§ESCã‚­ãƒ¼ã‚’æŠ¼ä¸‹ã—ãŸã‚‰ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”»é¢ã«æˆ»ã‚‹
 					scene.setOnKeyPressed(e->{
 						if(e.getCode()==KeyCode.ESCAPE) {
 							newsStage.close();
@@ -297,7 +297,7 @@ public class MediaPlayerController implements Initializable {
 						}
 					});
 					
-					// Œ»İ‚ÌƒXƒe[ƒW‚ÆƒƒfƒBƒAƒvƒŒƒCƒ„[‚ğ‘S‰æ–Ê‚ÌƒRƒ“ƒgƒ[ƒ‰[‚Éˆø‚«“n‚·
+					// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã¨ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å…¨ç”»é¢ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã«å¼•ãæ¸¡ã™
 					controller.init(stage , mediaPlayer);
 
 				} catch (IOException e) {
@@ -308,26 +308,26 @@ public class MediaPlayerController implements Initializable {
 	}
 
 	/**
-	 * ‚P/‚S‰æ–Ê
+	 * ï¼‘/ï¼”ç”»é¢
 	 */
 	@FXML
 	private void oneQuarterScreenClicked(){
 		
-		// ƒoƒCƒ“ƒfƒBƒ“ƒO‚ğÄİ’èB
+		// ãƒã‚¤ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’å†è¨­å®šã€‚
 		mediaView.fitWidthProperty().bind(new SimpleDoubleProperty(screenSize.getWidth()/4));
 		mediaView.fitHeightProperty().bind(new SimpleDoubleProperty(screenSize.getHeight()/4));
 
-		// BorderPane‚ÌƒTƒCƒY‚ğÄİ’è
-		outerBorderPane.setPrefSize(screenSize.getWidth()/4 + 50,  //‰¡‚ÌƒTƒCƒYA50px‚ÍƒIƒtƒZƒbƒg
-				screenSize.getHeight() / 4 - (topmostVBox.getHeight() + bottomHBox.getHeight()+70)); //c‚ÌƒTƒCƒYAVBox‚ÆHBox‚ÌƒIƒtƒZƒbƒg‚ ‚è
+		// BorderPaneã®ã‚µã‚¤ã‚ºã‚’å†è¨­å®š
+		outerBorderPane.setPrefSize(screenSize.getWidth()/4 + 50,  //æ¨ªã®ã‚µã‚¤ã‚ºã€50pxã¯ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+				screenSize.getHeight() / 4 - (topmostVBox.getHeight() + bottomHBox.getHeight()+70)); //ç¸¦ã®ã‚µã‚¤ã‚ºã€VBoxã¨HBoxã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚ã‚Š
 		
-		// ƒŠƒTƒCƒY
+		// ãƒªã‚µã‚¤ã‚º
 		stage.sizeToScene();
 	}
 	
 	/**
-	 * 1/2‰æ–Ê
-	 * ƒRƒƒ“ƒg‚Í“¯ãB
+	 * 1/2ç”»é¢
+	 * ã‚³ãƒ¡ãƒ³ãƒˆã¯åŒä¸Šã€‚
 	 */
 	@FXML
 	private void halfScreenClicked() {
@@ -342,8 +342,8 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * 3/4‰æ–Ê
-	 * ƒRƒƒ“ƒg‚Í“¯ãB
+	 * 3/4ç”»é¢
+	 * ã‚³ãƒ¡ãƒ³ãƒˆã¯åŒä¸Šã€‚
 	 */
 	@FXML
 	private void threeQuarterScreenClicked() {
@@ -359,27 +359,27 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ‰æ–ÊƒTƒCƒY•ÏX‚Ìƒƒjƒ…[‚Ì“®ì‚ğ’è‹`
+	 * ç”»é¢ã‚µã‚¤ã‚ºå¤‰æ›´ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML
 	private void follwingBySizeOfStage() {
-		//@ƒoƒCƒ“ƒfƒBƒ“ƒO‚ğŒ³‚É–ß‚é
+		//ã€€ãƒã‚¤ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’å…ƒã«æˆ»ã‚‹
 		mediaView.fitWidthProperty().bind(outerBorderPane.widthProperty().multiply(1).subtract(20));
 		mediaView.fitHeightProperty().bind(outerBorderPane.heightProperty().multiply(1).subtract(topmostVBox.getHeight() + bottomHBox.getHeight()+70));
 	}
 	
 	/**
-	 * Ã‰¹ƒƒjƒ…[‚Ì“®ì‚ğ’è‹`
+	 * é™éŸ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‹•ä½œã‚’å®šç¾©
 	 */
 	@FXML
 	private void setMuteEvent() {
 		
-		//Mute‚ªOn‚Å‚ ‚éê‡
+		//MuteãŒOnã§ã‚ã‚‹å ´åˆ
 		if(mediaPlayer.isMute()) {
 			mediaPlayer.setMute(false);
 			muteMenuItem.setText("Mute");
 		}
-		//Mute‚ªOff‚Ìê‡
+		//MuteãŒOffã®å ´åˆ
 		else {
 			mediaPlayer.setMute(true);
 			muteMenuItem.setText("Undo Mute");
@@ -391,17 +391,17 @@ public class MediaPlayerController implements Initializable {
 	
 	
 	/**
-	 * ˜A‘±Ä¶ƒ{ƒ^ƒ“‚Ì“®ì‚ğİ’è
+	 * é€£ç¶šå†ç”Ÿãƒœã‚¿ãƒ³ã®å‹•ä½œã‚’è¨­å®š
 	 */
 	private void repeatMediaEvent() {
 		
-		// ˜A‘±Ä¶ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğŠm”F
+		// é€£ç¶šå†ç”Ÿãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’ç¢ºèª
 		if(repeatButton.isSelected()) {
-			//@“ªo‚µ‚ÄÄ¶
+			//ã€€é ­å‡ºã—ã¦å†ç”Ÿ
 			mediaPlayer.seek(mediaPlayer.getStartTime());
 			mediaPlayer.play();
 		}else {
-			// “ªo‚µ‚Ä’â~
+			// é ­å‡ºã—ã¦åœæ­¢
 			mediaPlayer.seek(mediaPlayer.getStartTime());
 			mediaPlayer.stop();
 		}
@@ -409,14 +409,14 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * “®‰æíœ‚Ìè‘±‚«
+	 * å‹•ç”»å‰Šé™¤ã®æ‰‹ç¶šã
 	 */
 	private void removeMedia() {
-		// “®‰æ‚ğ’â~
+		// å‹•ç”»ã‚’åœæ­¢
 		mediaPlayer.stop();
 		
-		// ’¼ÚƒƒfƒBƒAƒvƒŒƒCƒ„[‚ğNull‚Éİ’è‚µ‚Ä‚µ‚Ü‚¦‚ÎAChangeListener‚Æ‚Ì‹£‡‚ª
-		// ”­¶‚µA—áŠO‚ª“Š‚°‚ç‚ê‚éB ƒoƒbƒNƒOƒ‰ƒEƒ“ƒhã‚Å1•b‚ğƒXƒŠ[ƒv‚µANull‚Éİ’è‚·‚ê‚ÎA‚±‚Ì–â‘è‚Í‰ñ”ğ‚Å‚«‚é
+		// ç›´æ¥ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’Nullã«è¨­å®šã—ã¦ã—ã¾ãˆã°ã€ChangeListenerã¨ã®ç«¶åˆãŒ
+		// ç™ºç”Ÿã—ã€ä¾‹å¤–ãŒæŠ•ã’ã‚‰ã‚Œã‚‹ã€‚ ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ä¸Šã§1ç§’ã‚’ã‚¹ãƒªãƒ¼ãƒ—ã—ã€Nullã«è¨­å®šã™ã‚Œã°ã€ã“ã®å•é¡Œã¯å›é¿ã§ãã‚‹
 		Task<Boolean> task = 
 		new Task<Boolean>() {
 
@@ -430,53 +430,53 @@ public class MediaPlayerController implements Initializable {
 		Thread thread = new Thread(task);
 		thread.start();
 
-		// ‘€ì‚Å‚«‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ–³Œø‰»‚É‚·‚é
+		// æ“ä½œã§ããªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ç„¡åŠ¹åŒ–ã«ã™ã‚‹
 		setItemsDisable();
 		haveMediaPlayer = false;
 	}
 
 	/**
-	 * “®‰æ“Ç‚İ‚İ‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”‚Å‚·
-	 * MediaPlayer‚ğ•Ô‚·B‚Ü‚½‚ÍNull‚ğ•Ô‚·B
+	 * å‹•ç”»èª­ã¿è¾¼ã¿æ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°ã§ã™
+	 * MediaPlayerã‚’è¿”ã™ã€‚ã¾ãŸã¯Nullã‚’è¿”ã™ã€‚
 	 * @return
 	 */
 	private MediaPlayer returnNewPlayer() {
 		
-		//@FileChooserƒ|ƒbƒvƒAƒbƒv—p‚ÌƒXƒe[ƒW
+		//ã€€FileChooserãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ç”¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸
 		Stage stage = new Stage();
 		
-		//	FileChooserƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+		//	FileChooserã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open new Video");
 		
-		//@‘Î‰‰Â”\‚Èƒtƒ@ƒCƒ‹Šg’£q‚ğ’è‹`
+		//ã€€å¯¾å¿œå¯èƒ½ãªãƒ•ã‚¡ã‚¤ãƒ«æ‹¡å¼µå­ã‚’å®šç¾©
 		List<String> videoFileExtension = Arrays.asList("*.mp4","*.mpg","*.wmv");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Video File(\"*,mp4\", \"*.mpg\",\"*.wmv\")", videoFileExtension));
 		
-		//@ƒXƒ^[ƒgƒfƒBƒŒƒNƒgƒŠ‚ğƒfƒtƒHƒ‹ƒg‚ÌƒrƒfƒI‚Éİ’è
+		//ã€€ã‚¹ã‚¿ãƒ¼ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ“ãƒ‡ã‚ªã«è¨­å®š
 		String userDirectoryString = System.getProperty("user.home") + "//Videos";
 		File userDirectory = new File(userDirectoryString);
 		
-		//@İ’è‚ª¸”s‚µ‚½‚ÍAÅ‰‚ÌƒfƒBƒŒƒNƒgƒŠ‚Éİ’è
+		//ã€€è¨­å®šãŒå¤±æ•—ã—ãŸæ™‚ã¯ã€æœ€åˆã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«è¨­å®š
 		if(!userDirectory.canRead()) {
 			userDirectory = new File("C://");
 		}
 		
-		//@ƒfƒBƒŒƒNƒgƒŠ‚ğİ’è
+		//ã€€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’è¨­å®š
 		fileChooser.setInitialDirectory(userDirectory);
 		
-		//@ƒƒfƒBƒAƒtƒ@ƒCƒ‹‚ğŠi”[‚·‚é
+		//ã€€ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ ¼ç´ã™ã‚‹
 		Optional<File> file = Optional.ofNullable(fileChooser.showOpenDialog(stage));
 		
-		// ‘¶İ‚·‚é‚©‚Ç‚¤‚©‚ğŠm”F
+		// å­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèª
 		if(file.isPresent()) {
 			Media media;
 			
-			// ‹KŠi‚ªx‰‡‚³‚ê‚Ä‚é‚©‚Ç‚¤‚©‚ğŠm”F
+			// è¦æ ¼ãŒæ”¯æ´ã•ã‚Œã¦ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèª
 			try {
 				media = new Media(file.get().toURI().toString());
 			}catch(MediaException e) {
-				// ‹KŠi‚ªx‰‡‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍŒx‚ğo‚ÄANull‚ğ•Ô‚·
+				// è¦æ ¼ãŒæ”¯æ´ã•ã‚Œã¦ã„ãªã„å ´åˆã¯è­¦å‘Šã‚’å‡ºã¦ã€Nullã‚’è¿”ã™
 				Alert alert = new Alert(AlertType.ERROR, "Unsupported Format");
 				alert.show();
 				return null;
@@ -485,44 +485,44 @@ public class MediaPlayerController implements Initializable {
 			return localPlayer;
 		}
 		else {
-			// ‚»‚êˆÈŠO‚Ìê‡‚ÍNull‚ğ•Ô‚·B
+			// ãã‚Œä»¥å¤–ã®å ´åˆã¯Nullã‚’è¿”ã™ã€‚
 			return null;
 		}
 	}
 	
 	/**
-	 * ƒƒfƒBƒA‚ğ“Ç‚İ‚ñ‚ª¬Œ÷‚µ‚½ê‡‚Ì‚İ‚ÉŒÄ‚Ño‚³‚ê‚éB
-	 * ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰‚Æ‚µ‚ÄAŠÔ•\¦ƒXƒ‰ƒCƒ_[‚É“®‰æ‚Ìî•ñ‚ğ’ñ‹Ÿ‚·‚é
+	 * ãƒ¡ãƒ‡ã‚£ã‚¢ã‚’èª­ã¿è¾¼ã‚“ãŒæˆåŠŸã—ãŸå ´åˆã®ã¿ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ã€‚
+	 * ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã¨ã—ã¦ã€æ™‚é–“è¡¨ç¤ºã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã«å‹•ç”»ã®æƒ…å ±ã‚’æä¾›ã™ã‚‹
 	 */
 	private void setTimeSliderEventOnReady() {
 		
-		// Ä¶€”õŠ®—¹‚ÉŠeíî•ñ‚ğæ“¾‚·‚éŠÖ”‚ğ“o˜^
+		// å†ç”Ÿæº–å‚™å®Œäº†æ™‚ã«å„ç¨®æƒ…å ±ã‚’å–å¾—ã™ã‚‹é–¢æ•°ã‚’ç™»éŒ²
 		Optional<Runnable> beforeFunc = Optional.ofNullable(mediaPlayer.getOnReady());
 		Runnable readyFunc = ()->{
 			
-			//@æ‚É“o˜^‚³‚ê‚½ŠÖ”‚ğÀs
+			//ã€€å…ˆã«ç™»éŒ²ã•ã‚ŒãŸé–¢æ•°ã‚’å®Ÿè¡Œ
 			if(beforeFunc.isPresent()) {
 				beforeFunc.get().run();
 			}
 			
-			//@ƒvƒŒƒCƒ„[‚É•Û‚³‚ê‚éƒƒfƒBƒA‚Ìî•ñ‚ğæ“¾‚µAƒXƒ‰ƒCƒ_‚Éİ’è
+			//ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ä¿æŒã•ã‚Œã‚‹ãƒ¡ãƒ‡ã‚£ã‚¢ã®æƒ…å ±ã‚’å–å¾—ã—ã€ã‚¹ãƒ©ã‚¤ãƒ€ã«è¨­å®š
 			timeSlider.setMin(mediaPlayer.getStartTime().toSeconds());
 			timeSlider.setMax(mediaPlayer.getStopTime().toSeconds());
 			timeSlider.setSnapToPixel(true);
 		};
 		mediaPlayer.setOnReady(readyFunc);
 		
-		// Ä¶’†‚ÉƒXƒ‰ƒCƒ_[‚ğˆÚ“®
-		// ƒvƒŒƒCƒ„[‚ÌÄ¶’†‚ÉŒÄ‚Ño‚³‚ê‚éƒŠƒXƒi‚ğ“o˜^
+		// å†ç”Ÿä¸­ã«ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç§»å‹•
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å†ç”Ÿä¸­ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒªã‚¹ãƒŠã‚’ç™»éŒ²
 		ChangeListener<? super Duration> playListener =(ov, newVal, currentVal)->{
 			
-			// “®‰æ‚Ìî•ñ‚ğƒ‰ƒxƒ‹o—Í
+			// å‹•ç”»ã®æƒ…å ±ã‚’ãƒ©ãƒ™ãƒ«å‡ºåŠ›
 			String timeInfoStr = String.format("%3.0f:%02.0f", mediaPlayer.getCurrentTime().toSeconds() / 60, 
 					mediaPlayer.getCurrentTime().toSeconds() % 60) + "/" + String.format("%3.0f:%02.0f",
 					mediaPlayer.getTotalDuration().toSeconds()/60, mediaPlayer.getTotalDuration().toSeconds()%60);
 			timeInfoLabel.setText(timeInfoStr);
 			
-			// ƒXƒ‰ƒCƒ_[‚ğˆÚ“®
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç§»å‹•
 			timeSlider.setValue(mediaPlayer.getCurrentTime().toSeconds());
 					
 		};
@@ -530,16 +530,16 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ƒƒfƒBƒA‚ğ“Ç‚İ‚ñ‚ª¬Œ÷‚µ‚½ê‡‚Ì‚İ‚ÉŒÄ‚Ño‚³‚ê‚éB
-	 * ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰‚Æ‚µ‚ÄAƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[‚É“®‰æ‚Ìî•ñ‚ğ’ñ‹Ÿ‚·‚é
+	 * ãƒ¡ãƒ‡ã‚£ã‚¢ã‚’èª­ã¿è¾¼ã‚“ãŒæˆåŠŸã—ãŸå ´åˆã®ã¿ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ã€‚
+	 * ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã¨ã—ã¦ã€ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã«å‹•ç”»ã®æƒ…å ±ã‚’æä¾›ã™ã‚‹
 	 */
 	private void setVolumeSliderEventOnReady() {
 		
-		// Ä¶€”õŠ®—¹‚ÉŠeíî•ñ‚ğæ“¾‚·‚éŠÖ”‚ğ“o˜^
+		// å†ç”Ÿæº–å‚™å®Œäº†æ™‚ã«å„ç¨®æƒ…å ±ã‚’å–å¾—ã™ã‚‹é–¢æ•°ã‚’ç™»éŒ²
 		Optional<Runnable> beforeFunc = Optional.ofNullable(mediaPlayer.getOnReady());
 		Runnable readyFunc = ()->{
 			
-			// æ‚É“o˜^‚³‚ê‚½ŠÖ”‚ğÀs
+			// å…ˆã«ç™»éŒ²ã•ã‚ŒãŸé–¢æ•°ã‚’å®Ÿè¡Œ
 			if(beforeFunc.isPresent()) {
 				beforeFunc.get().run();
 			}
@@ -547,11 +547,11 @@ public class MediaPlayerController implements Initializable {
 		};
 		mediaPlayer.setOnReady(readyFunc);
 		
-		// Ä¶’†‚Éƒ{ƒŠƒ…[ƒ€‚ğ•\¦
-		// ƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_[‚Ì’l‚ª•ÏX‚³‚ê‚é‚½‚Ñ‚ÉŒÄ‚Ño‚³‚ê‚éƒŠƒXƒi‚ğ“o˜^
+		// å†ç”Ÿä¸­ã«ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚’è¡¨ç¤º
+		// ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®å€¤ãŒå¤‰æ›´ã•ã‚Œã‚‹ãŸã³ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒªã‚¹ãƒŠã‚’ç™»éŒ²
 		ChangeListener<? super Number> volumeSliderListener = (ov,newVal,currentValue)->{
 			
-			// “®‰æ‚Ìƒ{ƒŠƒ…[ƒ€î•ñ‚ğƒ‰ƒxƒ‹‚Éo—Í
+			// å‹•ç”»ã®ãƒœãƒªãƒ¥ãƒ¼ãƒ æƒ…å ±ã‚’ãƒ©ãƒ™ãƒ«ã«å‡ºåŠ›
 			String volumeStr = String.format("%3.1f", mediaPlayer.getVolume()*100);
 			volumeInfoLabel.setText(volumeStr);
 			
@@ -562,44 +562,44 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * ƒvƒŒƒCƒ„[’†‚ÉƒƒfƒBƒAƒvƒŒƒCƒ„[‚Ì‚È‚¢ó‘Ô‚É–³Œø‰»‚·‚×‚«ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğˆêŠ‡‚µ‚Ä–³Œø‰»‚Å‚«‚éŠÖ”‚Å‚·
+	 * ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä¸­ã«ãƒ¡ãƒ‡ã‚£ã‚¢ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãªã„çŠ¶æ…‹ã«ç„¡åŠ¹åŒ–ã™ã¹ãã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ä¸€æ‹¬ã—ã¦ç„¡åŠ¹åŒ–ã§ãã‚‹é–¢æ•°ã§ã™
 	 */
 	private void setItemsDisable() {
-		//ƒ{ƒ^ƒ“
+		//ãƒœã‚¿ãƒ³
 		playButton.setDisable(true);
 		pauseButton.setDisable(true);
 		stopButton.setDisable(true);
 		repeatButton.setDisable(true);
 		
-		//ƒXƒ‰ƒCƒ_[
+		//ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 		timeSlider.setDisable(true);
 		volumeSlider.setDisable(true);
 		
-		//ƒƒjƒ…[ƒAƒCƒeƒ€
+		//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ 
 		playMenuItem.setDisable(true);
 		pauseMenuItem.setDisable(true);
 		stopMenuItem.setDisable(true);
 		repeatMenuItem.setDisable(true);
 		
-		// ŠÔ‚Æƒ{ƒŠƒ…[ƒ€ƒXƒ‰ƒCƒ_‚Ì’l‚ğ•\¦‚·‚éƒ‰ƒxƒ‹‚Ì‰Šú’l‚ğİ’è
-		// ƒƒfƒBƒA‚ªíœ‚³‚ê‚é‚à‰Šú’l‚É–ß‚é
+		// æ™‚é–“ã¨ãƒœãƒªãƒ¥ãƒ¼ãƒ ã‚¹ãƒ©ã‚¤ãƒ€ã®å€¤ã‚’è¡¨ç¤ºã™ã‚‹ãƒ©ãƒ™ãƒ«ã®åˆæœŸå€¤ã‚’è¨­å®š
+		// ãƒ¡ãƒ‡ã‚£ã‚¢ãŒå‰Šé™¤ã•ã‚Œã‚‹æ™‚ã‚‚åˆæœŸå€¤ã«æˆ»ã‚‹
 		timeInfoLabel.setText("0:00/0:00");
 		volumeInfoLabel.setText("0.0");
 	}
 	
 	private void setItemsEnable() {
 		
-		//ƒ{ƒ^ƒ“
+		//ãƒœã‚¿ãƒ³
 		playButton.setDisable(false);
 		pauseButton.setDisable(false);
 		stopButton.setDisable(false);
 		repeatButton.setDisable(false);
 		
-		//ƒXƒ‰ƒCƒ_[
+		//ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 		timeSlider.setDisable(false);
 		volumeSlider.setDisable(false);
 		
-		//ƒƒjƒ…[ƒAƒCƒeƒ€
+		//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ 
 		playMenuItem.setDisable(false);
 		pauseMenuItem.setDisable(false);
 		stopMenuItem.setDisable(false);
@@ -611,9 +611,9 @@ public class MediaPlayerController implements Initializable {
 	}
 	
 	/**
-	 * Œ»İfullScreenŠÖ”‚ğŒÄ‚Ño‚·ƒ\[ƒXƒRƒ“ƒ|[ƒlƒ“ƒg‚Í‘S‰æ–Ê‚Ìƒƒjƒ…[ƒAƒCƒeƒ€‚©‚ç‚©‚Ç‚¤‚©‚ğ”»’è‚·‚éŠÖ”‚Å‚·B
+	 * ç¾åœ¨fullScreené–¢æ•°ã‚’å‘¼ã³å‡ºã™ã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯å…¨ç”»é¢ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã‹ã‚‰ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹é–¢æ•°ã§ã™ã€‚
 	 * @param event
-	 * @return@boolean(true/false)
+	 * @returnã€€boolean(true/false)
 	 */
 	private boolean selectedfromMenu(Event event) {
 		
@@ -626,31 +626,31 @@ public class MediaPlayerController implements Initializable {
 	}
 
 	/**
-	 * ƒNƒŠƒbƒN‚ª˜A‘±‚Q‰ñ‚©‚Ç‚¤‚©‚ğ”»’è‚·‚é
-	 * @return@boolean(true/false)
+	 * ã‚¯ãƒªãƒƒã‚¯ãŒé€£ç¶šï¼’å›ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹
+	 * @returnã€€boolean(true/false)
 	 */
 	private boolean checkMouseClicked() {
 
-		// ‚P‰ñ–Ú
+		// ï¼‘å›ç›®
 		if(firstClickTime == 0) {
-			// 1‰ñ–Ú‚ÌƒVƒXƒeƒ€ƒ^ƒCƒ€‚ğ‹L˜^‚·‚éB‚»‚µ‚ÄA‹U‚ğ•Ô‚·
+			// 1å›ç›®ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¿ã‚¤ãƒ ã‚’è¨˜éŒ²ã™ã‚‹ã€‚ãã—ã¦ã€å½ã‚’è¿”ã™
 			firstClickTime = System.currentTimeMillis();
 			return false;
 		}
-		// 2‰ñ–Ú
+		// 2å›ç›®
 		else {
-			// ‚Q‰ñ–Ú‚ÌƒVƒXƒeƒ€ƒ^ƒCƒ€‚ğ‹L˜^‚·‚é
+			// ï¼’å›ç›®ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¿ã‚¤ãƒ ã‚’è¨˜éŒ²ã™ã‚‹
 			secondClickTime = System.currentTimeMillis();
 			
-			// 750ƒ~ƒŠ•b‚ğ—LŒøŠÔ‚É‚·‚éBŠÔŠÔŠu‚Í750‚ğ‰z‚¦‚È‚¢
+			// 750ãƒŸãƒªç§’ã‚’æœ‰åŠ¹æ™‚é–“ã«ã™ã‚‹ã€‚æ™‚é–“é–“éš”ã¯750ã‚’è¶Šãˆãªã„
 			if(secondClickTime - firstClickTime > 750) {
-				//@^‚Ìê‡‚Í‚P‰ñ–Ú‚Ìƒ^ƒCƒ€‚ğ‚Q‰ñ–Ú‚Ìƒ^ƒCƒ€‚Éã‘‚«‚·‚éB‚»‚µ‚ÄA‹U‚ğ•Ô‚·B
+				//ã€€çœŸã®å ´åˆã¯ï¼‘å›ç›®ã®ã‚¿ã‚¤ãƒ ã‚’ï¼’å›ç›®ã®ã‚¿ã‚¤ãƒ ã«ä¸Šæ›¸ãã™ã‚‹ã€‚ãã—ã¦ã€å½ã‚’è¿”ã™ã€‚
 				firstClickTime = secondClickTime;
-				secondClickTime = 0; //‚Q‰ñ–Ú‚Ìƒ^ƒCƒ€‚ğ‚O‚Éİ’è
+				secondClickTime = 0; //ï¼’å›ç›®ã®ã‚¿ã‚¤ãƒ ã‚’ï¼ã«è¨­å®š
 				return false;
 			}
 			else {
-				// ‹U‚Ìê‡‚Íƒ^ƒCƒ€‚ğƒŠƒZƒbƒg‚µA^‚ğ•Ô‚·
+				// å½ã®å ´åˆã¯ã‚¿ã‚¤ãƒ ã‚’ãƒªã‚»ãƒƒãƒˆã—ã€çœŸã‚’è¿”ã™
 				firstClickTime = 0;
 				secondClickTime = 0;
 				return true;
